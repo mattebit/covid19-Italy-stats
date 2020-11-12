@@ -10,7 +10,7 @@ fileurl = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-andame
 
 r = requests.get(fileurl, allow_redirects=True)
 
-#open('dpc-covid19-ita-andamento-nazionale.csv', 'wb').write(r.content)
+open('dpc-covid19-ita-andamento-nazionale.csv', 'wb').write(r.content)
 
 positivi =[]
 rapporto = []
@@ -72,15 +72,11 @@ with open(filepath) as csvfile:
             isolamento_domiciliare_prec = isolamento_domiciliare
 
 
-#plt.plot(r_terapia_ricov, 'r')
-#plt.plot(r_guariti_positivi, 'g')
 #plt.plot(casi_attivi, 'y')
 #plt.plot(terapia_intensiva_)
 
-#plt.plot(r_entrati_usciti_terapia, 'r')
-
 # Positivi / tamponi
-plt.ylabel("Positive / tests")
+plt.ylabel("daily positive / daily tests")
 plt.xlabel("Time")
 plt.plot(rapporto, 'r')
 plt.savefig("imgs/r_positive_test.png")
@@ -88,8 +84,29 @@ plt.close()
 
 
 # Ricoverati / Positivi
-plt.ylabel("Recovered / positive")
+plt.ylabel("Actual rcovered / Actual positive")
 plt.xlabel("Time")
 plt.plot(r_ricov_pos, 'r')
 plt.savefig("imgs/r_ricov_pos.png")
+plt.close()
+
+# Terapia intensiva / ospedalizzati
+plt.ylabel("Intensive care / Hospitalized")
+plt.xlabel("Time")
+plt.plot(r_terapia_ricov, 'r')
+plt.savefig("imgs/r_terapia_ricov.png")
+plt.close()
+
+# Guariti / positivi
+plt.ylabel("Daily recovered / actual positive")
+plt.xlabel("Time")
+plt.plot(r_guariti_positivi, 'g')
+plt.savefig("imgs/r_recovered_positive.png")
+plt.close()
+
+# Entrati / Usciti ospedalizzazione
+plt.ylabel("Daily entered / exited from Hospitalization")
+plt.xlabel("Time")
+plt.plot(r_entrati_usciti_terapia, 'g')
+plt.savefig("imgs/r_entered_exited_hosp.png")
 plt.close()
