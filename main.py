@@ -21,6 +21,11 @@ isolamento = []
 r_terapia_ricov = []
 r_guariti_positivi =[]
 r_entrati_usciti_terapia = []
+r_guariti_nuovi_positivi = []
+r_deceduti_positivi = []
+r_nuovipositivi_usciti = []
+var_terapia_intensiva = []
+baseline = []
 
 dimessi_guariti_prec = 0
 deceduti_prec = 0
@@ -63,8 +68,13 @@ with open(filepath) as csvfile:
             r_terapia_ricov.append(terapia_intensiva/ricoverati_con_sintomi)
             terapia_intensiva_.append(terapia_intensiva)
             r_guariti_positivi.append(dimessi_guariti_giornalieri/totale_positivi)
+            r_guariti_nuovi_positivi.append(dimessi_guariti_giornalieri/nuovi_positivi)
+            r_deceduti_positivi.append(deceduti/totale_casi)
+            r_nuovipositivi_usciti.append(nuovi_positivi/(dimessi_guariti_giornalieri+deceduti_giornalieri))
+            var_terapia_intensiva.append(terapia_intensiva_giornalieri)
+            baseline.append(0)
 
-            r_entrati_usciti_terapia.append( ((nuovi_positivi - isolamento_domiciliare_giornalieri)/(dimessi_guariti_giornalieri + deceduti_giornalieri)) )
+            #r_entrati_usciti_terapia.append( ((nuovi_positivi - isolamento_domiciliare_giornalieri)/(dimessi_guariti_giornalieri + deceduti_giornalieri)) )
 
             dimessi_guariti_prec = dimessi_guariti
             deceduti_prec = deceduti
@@ -105,8 +115,37 @@ plt.savefig("imgs/r_recovered_positive.png")
 plt.close()
 
 # Entrati / Usciti ospedalizzazione
-plt.ylabel("Daily entered / exited from Hospitalization")
+#plt.ylabel("Daily entered / exited from Hospitalization")
+#plt.xlabel("Time")
+#plt.plot(r_entrati_usciti_terapia, 'g')
+#plt.savefig("imgs/r_entered_exited_hosp.png")
+#plt.close()
+
+# Guariti / nuovi Positivi r_guariti_nuovi_positivi
+plt.ylabel("Daily recovered / Daily new positives")
 plt.xlabel("Time")
-plt.plot(r_entrati_usciti_terapia, 'g')
-plt.savefig("imgs/r_entered_exited_hosp.png")
+plt.plot(r_guariti_nuovi_positivi, 'g')
+plt.savefig("imgs/r_recovered_new_positive.png")
+plt.close()
+
+# Deceduti / casi totale_casi
+plt.ylabel("Deaths / total positives")
+plt.xlabel("Time")
+plt.plot(r_deceduti_positivi, 'r')
+plt.savefig("imgs/r_dead_positives.png")
+plt.close()
+
+# Nuovi positivi / Dimessi + deceduti_prec
+plt.ylabel("Daily New positives / Exited")
+plt.xlabel("Time")
+plt.plot(r_nuovipositivi_usciti, 'r')
+plt.savefig("imgs/r_newpositive_recovereddeaths.png")
+plt.close()
+
+# Var terapia terapia_intensiva
+plt.ylabel("Variation of intensive care")
+plt.xlabel("Time")
+plt.plot(var_terapia_intensiva, 'r')
+plt.plot(baseline, 'b')
+plt.savefig("imgs/var_terapia_intensiva.png")
 plt.close()

@@ -12,7 +12,7 @@
     <title>covid19-Italy-stats</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav id="navbar-example2" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
       <a class="navbar-brand" href="#">covid19-Italy-stats</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -21,34 +21,39 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Introduction <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#intro">Introduction <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">cases</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#graphs" role="button" aria-haspopup="true" aria-expanded="false">Graphs</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#1">Daily positives / daily tests</a>
+              <a class="dropdown-item" href="#two">two</a>
+              <div role="separator" class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#three">three</a>
+            </div>
           </li>
         </ul>
       </div>
     </nav>
-    <br>
-    <div class="container">
+    <br><br><br>
+    <div class="container" data-spy="scroll" data-target="#navbar-example2">
       <div class="row">
-        <h1>Introduction</h1>
+        <h1 id="intro">Introduction</h1>
 
       </div>
       <div class="row">
         <p>This page is updated every day, all data are collected from the official <a href="https://github.com/pcm-dpc/COVID-19">Italian repository</a>. This project is born to provide a different data view by different types of data comparison from the usual "daily new positives" graphs that the Italian medias shows.
         </p>
+        <p> I'm not a medic, nor an expert in virology. I just gather data and plot it.
+        </p>
       </div>
-      <div class="row"><h1>Graphs</h1></div>
+      <div id="graphs" class="row"><h1>Graphs</h1></div>
 
-      <div class="row"><h2>Daily positives / daily tests</h2></div>
+      <div class="row"><h2 id="1">Daily positives / daily tests</h2></div>
       <div class="row">
         <div class="col-md-6">
           <div class="media">
-            <img src="imgs/r_positive_test.png" class=" mr-3" alt="...">
+            <img src="imgs/r_positive_test.png" class="img-fluid mr-3" alt="...">
           </div>
         </div>
         <div class="col-md-6">
@@ -98,6 +103,8 @@
           <p>Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
         </div>
       </div>
+
+      <!--
       <div class="row"><h2>Daily entered / exited from hospitalization</h2></div>
       <div class="row">
         <div class="col-md-6">
@@ -110,9 +117,59 @@
           <p>Calculated by new daily hospitalized / daily recovered + daily deaths</p>
         </div>
       </div>
+    -->
 
+      <div class="row"><h2>Daily recovered / Daily new positives</h2></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="media">
+            <img src="imgs/r_recovered_new_positive.png" class=" mr-3" alt="...">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h5 class="mt-0">Details</h5>
+          <p>Calculated by daily recovered / new positives</p>
+        </div>
+      </div>
 
+      <div class="row"><h2>Deaths / total positives</h2></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="media">
+            <img src="imgs/r_dead_positives.png" class=" mr-3" alt="...">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h5 class="mt-0">Details</h5>
+          <p>Calculated by daily deaths / toatl positives</p>
+        </div>
+      </div>
 
+      <div class="row"><h2>Daily New positives / Exited</h2></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="media">
+            <img src="imgs/r_newpositive_recovereddeaths.png" class=" mr-3" alt="...">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h5 class="mt-0">Details</h5>
+          <p>Calculated by Daily new positives / (Daily recovered + Daily deaths)</p>
+        </div>
+      </div>
+
+      <div class="row"><h2>Variation of intensive care</h2></div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="media">
+            <img src="imgs/var_terapia_intensiva.png" class=" mr-3" alt="...">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <h5 class="mt-0">Details</h5>
+          <p>It's the variation of intensive care between the previous day</p>
+        </div>
+      </div>
 
     </div>
 
