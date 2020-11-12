@@ -90,6 +90,6 @@ plt.close()
 # Ricoverati / Positivi
 plt.ylabel("Recovered / positive")
 plt.xlabel("Time")
-plt.plot(r_ricov_pos, 'b')
+plt.plot(r_ricov_pos, 'r')
 plt.savefig("imgs/r_ricov_pos.png")
 plt.close()
