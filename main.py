@@ -12,6 +12,7 @@ r = requests.get(fileurl, allow_redirects=True)
 
 open('dpc-covid19-ita-andamento-nazionale.csv', 'wb').write(r.content)
 
+lista_date = []
 positivi =[]
 rapporto = []
 terapia_intensiva_ = []
@@ -37,7 +38,8 @@ with open(filepath) as csvfile:
     reader = csv.reader(csvfile, delimiter=',', quotechar='|')
     for row in reader:
         if (row[8] != 'nuovi_positivi'):
-            data = row[0]
+            data = row[0].split('T')[0]
+
             ricoverati_con_sintomi = int(row[2])
 
             terapia_intensiva = int(row[3])
@@ -87,7 +89,7 @@ with open(filepath) as csvfile:
 
 # Positivi / tamponi
 plt.ylabel("daily positive / daily tests")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(rapporto, 'r')
 plt.savefig("imgs/r_positive_test.png")
 plt.close()
@@ -95,56 +97,56 @@ plt.close()
 
 # Ricoverati / Positivi
 plt.ylabel("Actual rcovered / Actual positive")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(r_ricov_pos, 'r')
 plt.savefig("imgs/r_ricov_pos.png")
 plt.close()
 
 # Terapia intensiva / ospedalizzati
 plt.ylabel("Intensive care / Hospitalized")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(r_terapia_ricov, 'r')
 plt.savefig("imgs/r_terapia_ricov.png")
 plt.close()
 
 # Guariti / positivi
 plt.ylabel("Daily recovered / actual positive")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(r_guariti_positivi, 'g')
 plt.savefig("imgs/r_recovered_positive.png")
 plt.close()
 
 # Entrati / Usciti ospedalizzazione
 #plt.ylabel("Daily entered / exited from Hospitalization")
-#plt.xlabel("Time")
+#plt.xlabel("Day")
 #plt.plot(r_entrati_usciti_terapia, 'g')
 #plt.savefig("imgs/r_entered_exited_hosp.png")
 #plt.close()
 
 # Guariti / nuovi Positivi r_guariti_nuovi_positivi
 plt.ylabel("Daily recovered / Daily new positives")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(r_guariti_nuovi_positivi, 'g')
 plt.savefig("imgs/r_recovered_new_positive.png")
 plt.close()
 
 # Deceduti / casi totale_casi
 plt.ylabel("Deaths / total positives")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(r_deceduti_positivi, 'r')
 plt.savefig("imgs/r_dead_positives.png")
 plt.close()
 
 # Nuovi positivi / Dimessi + deceduti_prec
 plt.ylabel("Daily New positives / Exited")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(r_nuovipositivi_usciti, 'r')
 plt.savefig("imgs/r_newpositive_recovereddeaths.png")
 plt.close()
 
 # Var terapia terapia_intensiva
 plt.ylabel("Variation of intensive care")
-plt.xlabel("Time")
+plt.xlabel("Day")
 plt.plot(var_terapia_intensiva, 'r')
 plt.plot(baseline, 'b')
 plt.savefig("imgs/var_terapia_intensiva.png")
