@@ -64,10 +64,8 @@ const fillGraphs = async () => {
         
         // Add cursor
         c_positivi_tamponi.cursor = new am4charts.XYCursor();
-        c_positivi_tamponi.cursor = new am4charts.XYCursor();
-        c_positivi_tamponi.cursor.behavior = "panX";
-        //c_positivi_tamponi.cursor.xAxis = dateAxis;
-        //c_positivi_tamponi.cursor.snapToSeries = series;
+        c_positivi_tamponi.cursor.xAxis = dateAxis;
+        c_positivi_tamponi.cursor.snapToSeries = series;
 
         c_positivi_tamponi.data = j_r_positivi_tamponi;
 
