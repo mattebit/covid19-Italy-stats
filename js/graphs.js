@@ -1,6 +1,6 @@
 const fillGraphs = async () => {
     // Fetchs all jsons
-    const response = await fetch("js/datas/j_r_positivi_tamponi.json");
+    var response = await fetch("js/datas/j_r_positivi_tamponi.json");
     const j_r_positivi_tamponi = await response.json(); 
 
     response = await fetch("js/datas/j_r_ricoverati_positivi.json");
