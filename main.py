@@ -153,8 +153,9 @@ with open(filepath) as csvfile:
             baseline.append(0)
 
             # NEW GRAPHS
-            positivi_tamponi = round(nuovi_positivi/(tamponi - precedente), 3)
-            j_r_positivi_tamponi.append({"date": data, "value": positivi_tamponi})
+            positivi_tamponi = round( (nuovi_positivi/(tamponi - precedente))*100, 2)
+            
+            j_r_positivi_tamponi.append({"date": data, "r": positivi_tamponi, "positives": nuovi_positivi})
 
             ricoverati_positivi = round((totale_ospedalizzati/totale_positivi),3)
             j_r_ricoverati_positivi.append({"date": data, "value": ricoverati_positivi})
