@@ -4,6 +4,8 @@ import matplotlib.dates
 import requests
 import os
 import codecs
+import json
+import math
 
 filepath = "dpc-covid19-ita-andamento-nazionale.csv"
 comuni_giornaliero_path = "data/comuni_giornaliero_dati_fino_31agosto.csv"
@@ -31,6 +33,9 @@ var_terapia_intensiva = []
 decessi_giornalieri_15_18_media = []
 baseline = []
 r_deceduticovid_deceduti_norm = []
+
+j_r_positivi_tamponi = []
+j_r_ricoverati_positivi = []
 
 dimessi_guariti_prec = 0
 deceduti_prec = 0
@@ -101,7 +106,6 @@ def generate_median_15_18():
             if median != 0:
                 a_15_18.append(median)
 
-
 a_15_18 = [13595.0, 13152.0, 13125.0, 13120.0, 13233.0, 13015.0, 12859.0, 13101.0, 13447.0, 13449.0, 13241.0, 13342.0, 13155.0, 13082.0, 13070.0, 13111.0, 13054.0, 13024.0, 12897.0, 12793.0, 12845.0, 12896.0, 12961.0, 12844.0, 12774.0, 12415.0, 12635.0, 12691.0, 12429.0, 12841.0, 12527.0, 12991.0, 12776.0, 12593.0, 12421.0, 12238.0, 12373.0, 12188.0, 12060.0, 12078.0, 12104.0, 12250.0, 12200.0, 12205.0, 12121.0, 12066.0, 11998.0, 12000.0, 12164.0, 11952.0, 11699.0, 11850.0, 11829.0, 11847.0, 11817.0, 11799.0, 11792.0, 11655.0, 11812.0, 3632.0, 11857.0, 12043.0, 12056.0, 11794.0, 11974.0, 11856.0, 11850.0, 11711.0, 11943.0, 12196.0, 11957.0, 12261.0, 12274.0, 12121.0, 11999.0, 12142.0, 12316.0, 12343.0, 12307.0, 12424.0, 12619.0, 12477.0, 12647.0, 12222.0, 12448.0, 12122.0, 12361.0, 12444.0, 12119.0, 12388.0, 11850.0, 12190.0, 11788.0, 12022.0, 11820.0, 11692.0, 11523.0, 11431.0, 11396.0, 11264.0, 11517.0, 11373.0, 11293.0, 11410.0, 11242.0, 11089.0, 10689.0, 11009.0, 10909.0, 10727.0, 10721.0, 10632.0, 10463.0, 10750.0, 10435.0, 10360.0, 10469.0, 10559.0, 10292.0, 10162.0, 9873.0, 10071.0, 10302.0, 10194.0, 10044.0, 10196.0, 10197.0, 10195.0, 10213.0, 10020.0, 10001.0, 9840.0, 9885.0, 10025.0, 9747.0, 9853.0, 9614.0, 9863.0, 9969.0, 9690.0, 9596.0, 9492.0, 9660.0, 9614.0, 9707.0, 9739.0, 9654.0, 9604.0, 9640.0, 9682.0, 9709.0, 9397.0, 9655.0, 9616.0, 9823.0, 9927.0, 10054.0, 9812.0, 9659.0, 9757.0, 9642.0, 9403.0, 9473.0, 9668.0, 9527.0, 9608.0, 9625.0, 9688.0, 9493.0, 9280.0, 9348.0, 9303.0, 9473.0, 9596.0, 9695.0, 9900.0, 9866.0, 9875.0, 9925.0, 9915.0, 9871.0, 9808.0, 10039.0, 9957.0, 10159.0, 9949.0, 9953.0, 10129.0, 10065.0, 10373.0, 10148.0, 10081.0, 10060.0, 9977.0, 9920.0, 9584.0, 9830.0, 9714.0, 9629.0, 9528.0, 9908.0, 10115.0, 10163.0, 10236.0, 10364.0, 10200.0, 10057.0, 9934.0, 9875.0, 9630.0, 9821.0, 9907.0, 10010.0, 10306.0, 10132.0, 10415.0, 10479.0, 10240.0, 10532.0, 10536.0, 10585.0, 10587.0, 10628.0, 10324.0, 10119.0, 9993.0, 9801.0, 9709.0, 9566.0, 9666.0, 9809.0, 9363.0, 9463.0, 9741.0, 9473.0, 9397.0, 9736.0, 9259.0, 9336.0, 9282.0, 9552.0, 9544.0, 9558.0, 9507.0, 8006.0, 7686.0, 7533.0, 7555.0, 7825.0, 7589.0, 7647.0, 7603.0, 7512.0, 7495.0, 7677.0, 7769.0, 7816.0, 7885.0, 8035.0, 7912.0, 7910.0, 7784.0, 7768.0, 7560.0, 7733.0, 7722.0, 7620.0, 7684.0, 7767.0, 7848.0, 7802.0, 7950.0, 7999.0, 8050.0, 8196.0, 7961.0, 8123.0, 7946.0, 8104.0, 8222.0, 8226.0, 8180.0, 8351.0, 8281.0, 8396.0, 8223.0, 8427.0, 8521.0, 8529.0, 8436.0, 8383.0, 8511.0, 8496.0, 8445.0, 8335.0, 8232.0, 8292.0, 8350.0, 8703.0, 8422.0, 8509.0, 8252.0, 8595.0, 8310.0, 7993.0, 8121.0, 8437.0, 8263.0, 8517.0, 8594.0, 8653.0, 8387.0, 8393.0, 8415.0, 8476.0, 8570.0, 8551.0, 8598.0, 8607.0, 8615.0, 8615.0, 8633.0, 8603.0, 8683.0, 8721.0, 8732.0, 8714.0, 8870.0, 8693.0, 8725.0, 8796.0, 8607.0, 8582.0, 8473.0, 8668.0, 8899.0, 8891.0, 8976.0, 8910.0, 8887.0, 8971.0, 8718.0, 9048.0, 9114.0, 9186.0, 9128.0, 9419.0, 9278.0, 9366.0, 9120.0, 9335.0, 9282.0, 9266.0, 9297.0, 9556.0, 9689.0, 9741.0, 9494.0, 9466.0, 9736.0, 9697.0, 9997.0, 10208.0, 10164.0, 10017.0, 9807.0]
 
 # Prima data 24/2
@@ -115,22 +119,17 @@ with open(filepath) as csvfile:
 
 
             ricoverati_con_sintomi = int(row[2])
-
             terapia_intensiva = int(row[3])
             terapia_intensiva_giornalieri = terapia_intensiva - terapia_intensiva_prec
-
             totale_ospedalizzati = int(row[4])
             isolamento_domiciliare = int(row[5])
             isolamento_domiciliare_giornalieri = isolamento_domiciliare - isolamento_domiciliare_prec
             totale_positivi = int(row[6])
             variazione_totale_positivi = int(row[7])
             nuovi_positivi = int(row[8])
-
             dimessi_guariti = int(row[9])
             dimessi_guariti_giornalieri = dimessi_guariti - dimessi_guariti_prec
-
             decessi_giornalieri_15_18_media = a_15_18[54 + count]
-
             deceduti = int(row[10])
             deceduti_giornalieri = deceduti - deceduti_prec
             #casi_da_sospetto_diagnostico = int(row[11])
@@ -139,9 +138,9 @@ with open(filepath) as csvfile:
             tamponi = int(row[14])
             #casi_testati = int(row[15])
 
+            # OLD GRAPHS
             positivi.append(totale_positivi)
             rapporto.append(nuovi_positivi/(tamponi - precedente))
-            precedente = int(row[14])
             r_ricov_pos.append(totale_ospedalizzati/totale_positivi)
             r_terapia_ricov.append(terapia_intensiva/ricoverati_con_sintomi)
             terapia_intensiva_.append(terapia_intensiva)
@@ -153,16 +152,26 @@ with open(filepath) as csvfile:
             var_terapia_intensiva.append(terapia_intensiva_giornalieri)
             baseline.append(0)
 
-            #r_entrati_usciti_terapia.append( ((nuovi_positivi - isolamento_domiciliare_giornalieri)/(dimessi_guariti_giornalieri + deceduti_giornalieri)) )
+            # NEW GRAPHS
+            positivi_tamponi = round(nuovi_positivi/(tamponi - precedente), 3)
+            j_r_positivi_tamponi.append({"date": data, "value": positivi_tamponi})
+
+            ricoverati_positivi = round((totale_ospedalizzati/totale_positivi),3)
+            j_r_ricoverati_positivi.append({"date": data, "value": ricoverati_positivi})
 
             dimessi_guariti_prec = dimessi_guariti
             deceduti_prec = deceduti
             terapia_intensiva_prec = terapia_intensiva
             isolamento_domiciliare_prec = isolamento_domiciliare
             count += 1
+            precedente = int(row[14])
 
-#plt.plot(casi_attivi, 'y')
-#plt.plot(terapia_intensiva_)
+# Writes data' jsons for graphs
+f = open("js/datas/j_r_positivi_tamponi.json", "w")
+f.write(json.dumps(j_r_positivi_tamponi))
+
+f = open("js/datas/j_r_ricoverati_positivi.json", "w")
+f.write(json.dumps(j_r_ricoverati_positivi))
 
 # Positivi / tamponi
 plt.ylabel("daily positive / daily tests")
@@ -170,7 +179,6 @@ plt.xlabel("Day")
 plt.plot(rapporto, 'r')
 plt.savefig("imgs/r_positive_test.png")
 plt.close()
-
 
 # Ricoverati / Positivi
 plt.ylabel("Actual rcovered / Actual positive")
@@ -194,11 +202,11 @@ plt.savefig("imgs/r_recovered_positive.png")
 plt.close()
 
 # Entrati / Usciti ospedalizzazione
-#plt.ylabel("Daily entered / exited from Hospitalization")
-#plt.xlabel("Day")
-#plt.plot(r_entrati_usciti_terapia, 'g')
-#plt.savefig("imgs/r_entered_exited_hosp.png")
-#plt.close()
+plt.ylabel("Daily entered / exited from Hospitalization")
+plt.xlabel("Day")
+plt.plot(r_entrati_usciti_terapia, 'g')
+plt.savefig("imgs/r_entered_exited_hosp.png")
+plt.close()
 
 # Guariti / nuovi Positivi r_guariti_nuovi_positivi
 plt.ylabel("Daily recovered / Daily new positives")
