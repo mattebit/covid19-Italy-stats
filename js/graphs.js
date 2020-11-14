@@ -1,6 +1,6 @@
 const fillGraphs = async () => {
     // Fetchs all jsons
-    var response = await fetch("js/datas/j_r_positivi_tamponi.json");
+    const response = await fetch("js/datas/j_r_positivi_tamponi.json");
     const j_r_positivi_tamponi = await response.json(); 
 
     response = await fetch("js/datas/j_r_ricoverati_positivi.json");
@@ -16,13 +16,13 @@ const fillGraphs = async () => {
         c_positivi_tamponi.data = j_r_positivi_tamponi;
         
         // Create axes
-        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        var dateAxis = c_positivi_tamponi.xAxes.push(new am4charts.DateAxis());
         dateAxis.renderer.minGridDistance = 50;
         
-        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        var valueAxis = c_positivi_tamponi.yAxes.push(new am4charts.ValueAxis());
         
         // Create series
-        var series = chart.series.push(new am4charts.LineSeries());
+        var series = c_positivi_tamponi.series.push(new am4charts.LineSeries());
         series.dataFields.valueY = "value";
         series.dataFields.dateX = "date";
         series.strokeWidth = 2;
@@ -44,8 +44,30 @@ const fillGraphs = async () => {
 
         var c_ricoverati_positivi = am4core.create("ricoverati_positivi", am4charts.XYChart);
         c_ricoverati_positivi.data = j_r_ricoverati_positivi;
+        
+        // Create axes
+        var dateAxis = c_ricoverati_positivi.xAxes.push(new am4charts.DateAxis());
+        dateAxis.renderer.minGridDistance = 50;
+        
+        var valueAxis = c_ricoverati_positivi.yAxes.push(new am4charts.ValueAxis());
+        
+        // Create series
+        var series = c_ricoverati_positivi.series.push(new am4charts.LineSeries());
+        series.dataFields.valueY = "value";
+        series.dataFields.dateX = "date";
+        series.strokeWidth = 2;
+        series.minBulletDistance = 10;
+        series.tooltipText = "{valueY}";
+        series.tooltip.pointerOrientation = "vertical";
+        series.tooltip.background.cornerRadius = 20;
+        series.tooltip.background.fillOpacity = 0.5;
+        series.tooltip.label.padding(12,12,12,12)
+        
+        // Add scrollbar
         c_ricoverati_positivi.scrollbarX = new am4charts.XYChartScrollbar();
-        c_ricoverati_positivi.scrollbarX.series.push(series)
+        c_ricoverati_positivi.scrollbarX.series.push(series);
+        
+        // Add cursor
         c_ricoverati_positivi.cursor = new am4charts.XYCursor();
         c_ricoverati_positivi.cursor.xAxis = dateAxis;
         c_ricoverati_positivi.cursor.snapToSeries = series;
