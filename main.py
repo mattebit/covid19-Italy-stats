@@ -6,6 +6,7 @@ import os
 import codecs
 import json
 import math
+from datetime import datetime
 
 filepath = "dpc-covid19-ita-andamento-nazionale.csv"
 comuni_giornaliero_path = "data/comuni_giornaliero_dati_fino_31agosto.csv"
@@ -36,6 +37,7 @@ r_deceduticovid_deceduti_norm = []
 
 j_r_positivi_tamponi = []
 j_r_ricoverati_positivi = []
+j_r_terapia_ospedalizzati = []
 
 dimessi_guariti_prec = 0
 deceduti_prec = 0
@@ -116,7 +118,9 @@ with open(filepath) as csvfile:
     for row in reader:
         if (row[8] != 'nuovi_positivi'):
             data = row[0].split('T')[0]
+            tmp = data.split('-')
 
+            data = "new Date(" + tmp[0] + "," + tmp[1] + "," + tmp[2] +")";
 
             ricoverati_con_sintomi = int(row[2])
             terapia_intensiva = int(row[3])
@@ -157,8 +161,11 @@ with open(filepath) as csvfile:
             
             j_r_positivi_tamponi.append({"date": data, "r": positivi_tamponi, "positives": nuovi_positivi})
 
-            ricoverati_positivi = round((totale_ospedalizzati/totale_positivi),3)
+            ricoverati_positivi = round((totale_ospedalizzati/totale_positivi)*100 ,2)
             j_r_ricoverati_positivi.append({"date": data, "value": ricoverati_positivi})
+
+            terapia_ospedalizzati = round(terapia_intensiva/ricoverati_con_sintomi*100, 2)
+            j_r_terapia_ospedalizzati.append({"date": data, "value": terapia_ospedalizzati})
 
             dimessi_guariti_prec = dimessi_guariti
             deceduti_prec = deceduti
@@ -173,6 +180,9 @@ f.write(json.dumps(j_r_positivi_tamponi))
 
 f = open("js/datas/j_r_ricoverati_positivi.json", "w")
 f.write(json.dumps(j_r_ricoverati_positivi))
+
+f = open("js/datas/j_r_terapia_ospedalizzati.json", "w")
+f.write(json.dumps(j_r_terapia_ospedalizzati))
 
 # Positivi / tamponi
 plt.ylabel("daily positive / daily tests")
