@@ -266,7 +266,7 @@ function plot_c_decessi_covid_decessi_20(data) {
     c_decessi_covid_decessi_20.cursor = new am4charts.XYCursor();
     c_decessi_covid_decessi_20.cursor.xAxis = dateAxis;
     c_decessi_covid_decessi_20.cursor.snapToSeries = series;
-    c_decessi_20_decessi_15_18.svgContainer.autoResize = false;
+    c_decessi_covid_decessi_20.svgContainer.autoResize = false;
 }
 
 fillGraphs()
