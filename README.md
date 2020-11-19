@@ -10,7 +10,7 @@ Gets daily data from Italian government and plot various graphs
 - Daily covid deaths / Daily total deaths
 
 ### To be implemented
-- 
+- map by region
 
 ## Data sources
 - Deaths and Deaths causes [istat](https://www.istat.it/it/archivio/240401)
