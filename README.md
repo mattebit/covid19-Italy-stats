@@ -10,6 +10,12 @@ Gets daily data from Italian government and plot various graphs
 - Daily covid deaths / Daily total deaths
 
 ### To be implemented
+- Daily Recovered / Daily New positive
+- Daily Recovered / Actual positive
+- Deaths / Positives
+- Intensive care varitation
+- Daily new positive / Exited
+
 - map by region
 
 ## Data sources
