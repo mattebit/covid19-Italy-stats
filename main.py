@@ -41,6 +41,11 @@ j_r_ricoverati_positivi = []
 j_r_terapia_ospedalizzati = []
 j_r_decessi_20_decessi_15_18 = []
 j_r_decessi_covid_decessi_20 = []
+j_r_dimessi_guariti_nuovi_positivi = []
+j_r_dimessi_guariti_attualmente_positivi =[]
+j_r_deaths_positives = []
+j_r_nuovi_positivi_usciti = []
+j_intensive_variation = []
 
 dimessi_guariti_prec = 0
 deceduti_prec = 0
@@ -198,6 +203,21 @@ with open(filepath) as csvfile:
             else:
                 j_r_decessi_covid_decessi_20.append({"date": data, "value": 0})
 
+            dimessi_guariti_nuovi_positivi = round( (dimessi_guariti_giornalieri / nuovi_positivi)*100, 2 )
+            j_r_dimessi_guariti_nuovi_positivi.append({"date": data, "value": dimessi_guariti_nuovi_positivi})
+
+            dimessi_guariti_attualmente_positivi = round( (dimessi_guariti_giornalieri / totale_positivi)*100, 2 )
+            j_r_dimessi_guariti_attualmente_positivi.append({"date": data, "value": dimessi_guariti_attualmente_positivi})
+
+            deaths_positives = round ( (deceduti/totale_casi)*100, 2 )
+            j_r_deaths_positives.append({"date": data, "value": deaths_positives})
+
+            nuovi_positivi_usciti = round ( (nuovi_positivi/(dimessi_guariti_giornalieri + deceduti_giornalieri)) )
+            j_r_nuovi_positivi_usciti.append({"date": data, "value": nuovi_positivi_usciti})
+            
+            intensive_variation = terapia_intensiva - terapia_intensiva_prec
+            j_intensive_variation.append({"date": data, "value": intensive_variation})
+
             dimessi_guariti_prec = dimessi_guariti
             deceduti_prec = deceduti
             terapia_intensiva_prec = terapia_intensiva
@@ -220,6 +240,21 @@ f.write(json.dumps(j_r_decessi_20_decessi_15_18))
 
 f = open("js/datas/j_r_decessi_covid_decessi_20.json", "w")
 f.write(json.dumps(j_r_decessi_covid_decessi_20))
+
+f = open("js/datas/j_r_dimessi_guariti_nuovi_positivi.json", "w")
+f.write(json.dumps(j_r_dimessi_guariti_nuovi_positivi))
+
+f = open("js/datas/j_r_dimessi_guariti_attualmente_positivi.json", "w")
+f.write(json.dumps(j_r_dimessi_guariti_attualmente_positivi))
+
+f = open("js/datas/j_r_deaths_positives.json", "w")
+f.write(json.dumps(j_r_deaths_positives))
+
+f = open("js/datas/j_r_nuovi_positivi_usciti.json", "w")
+f.write(json.dumps(j_r_nuovi_positivi_usciti))
+
+f = open("js/datas/j_intensive_variation.json", "w")
+f.write(json.dumps(j_intensive_variation))
 
 # Positivi / tamponi
 plt.ylabel("daily positive / daily tests")
