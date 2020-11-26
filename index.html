@@ -47,26 +47,25 @@
 					<div id="menu_list">
 						<ul class="list-unstyled components mb-5">
 							<li class="active">
-								<a href="#introduction"><span class="fa mr-3"></span>Introduction</a>
+								<a id="-2" href="#introduction"><span class="fa mr-3"></span></a>
 							</li>
 							<li>
-								<a href="#graphs"><span class="fa mr-3"></span>Graphs</a>
+								<a id="-3" href="#graphs"><span class="fa mr-3"></span></a>
 							</li>
 							<li>
-								<a href="#1"><span class="fa mr-3"></span>Daily positives / Daily tests</a>
+								<a id="-4" href="#1"><span class="fa mr-3"></span></a>
 							</li>
 							<li>
-								<a href="#2"><span class="fa mr-3"></span>Hospitalized / Positives</a>
+								<a id="-5" href="#2"><span class="fa mr-3"></span></a>
 							</li>
 							<li>
-								<a href="#3"><span class="fa mr-3"></span>Intensive care / hospitalized</a>
+								<a id="-6" href="#3"><span class="fa mr-3"></span></a>
 							</li>
 							<li>
-								<a href="#4"><span class="fa mr-3"></span>Daily deaths / Daily deaths in median
-									2015-18</a>
+								<a id="-7" href="#4"><span class="fa mr-3"></span></a>
 							</li>
 							<li>
-								<a href="#5"><span class="fa mr-3"></span>Daily covid deaths / Daily total deaths</a>
+								<a id="-8" href="#5"><span class="fa mr-3"></span></a>
 							</li>
 						</ul>
 					</div>
@@ -105,65 +104,57 @@
 		<div id="content" class="p-4 p-md-5 pt-5">
 			<div class="container-fluid" data-spy="scroll" data-target="#menu_list">
 				<div class="row">
-					<h1 id="introduction">Introduction</h1>
+					<h1 id="introduction"></h1>
 				</div>
 				<div class="row">
-					<p>This page is updated every day, all data are collected from the official <a
-							href="https://github.com/pcm-dpc/COVID-19">Italian repository</a>. This project is born to
-						provide a different
-						data view by different types of data comparison from the usual "daily new positives" graphs that
-						the Italian
-						medias shows.
+					<p id="-1">
 					</p>
-					<p> I'm not a doctor, nor an expert in virology. I just gather data and plot it.
+					<p id="0"> 
 					</p>
 				</div>
-				<div id="graphs" class="row">
-					<h1>Graphs</h1>
+				<div class="row">
+					<h1 id="graphs" >Graphs</h1>
 				</div>
-				<div id="1" class="row">
-					<h2>Daily positives / Daily tests</h2>
+				<div class="row">
+					<h2 id="1"></h2>
 				</div>
 				<div class="row" id="positivi_tamponi" style="width: 100%; height: 500px;"></div>
 				<br>
-				<div id="2" class="row">
-					<h2>Hospitalized / Positives</h2>
+				<div class="row">
+					<h2 id="2"></h2>
 				</div>
 				<div class="row" id="ricoverati_positivi" style="width: 100%; height: 500px;"></div>
 				<br>
-				<div id="3" class="row">
-					<h2>Intensive care / hospitalized</h2>
+				<div class="row">
+					<h2 id="3"></h2>
 				</div>
 				<div class="row" id="c_terapia_ospedalizzati" style="width: 100%; height: 500px;"></div>
 				<br>
-				<div id="4" class="row">
-					<h2>Daily deaths / Daily deaths in median 2015-18</h2>
+				<div class="row">
+					<h2 id="4"></h2>
 
 				</div>
 				<div class="row">
-					<p>
-						This graph shows the relation between daily deaths in italy in 2020 and daily deaths in
-						Italy
-						between 2015 and 2018 as a median.
+					<p id="4_1">
+						
 					</p>
 				</div>
 				<div class="row" id="c_decessi_20_decessi_15_18" style="width: 100%; height: 500px;"></div>
 				<br>
 
-				<div id="5" class="row">
-					<h2>Daily covid deaths / Daily total deaths</h2>
+				<div class="row">
+					<h2 id="5"></h2>
 				</div>
 				<div class="row">
-					<p>
-						This graph shows the relation between covid deaths and all deaths every day in Italy in 2020.
-						Missing data is (obviously) because of missing datas.
+					<p id="5_1">
+						
 					</p>
 				</div>
 				<div class="row" id="c_decessi_covid_decessi_20" style="width: 100%; height: 500px;"></div>
 				<br>
 
-				<div id="5" class="row">
-					<h2>Daily recovered / Daily new positives</h2>
+				<div class="row">
+					<h2 id="6"></h2>
 				</div>
 				<div class="row">
 					<p>
@@ -172,8 +163,8 @@
 				<div class="row" id="c_dimessi_guariti_nuovi_positivi" style="width: 100%; height: 500px;"></div>
 				<br>
 
-				<div id="5" class="row">
-					<h2>Daily recovered / Actual positives</h2>
+				<div class="row">
+					<h2 id="7"></h2>
 				</div>
 				<div class="row">
 					<p>
@@ -182,8 +173,8 @@
 				<div class="row" id="c_dimessi_guariti_attualmente_positivi" style="width: 100%; height: 500px;"></div>
 				<br>
 				
-				<div id="5" class="row">
-					<h2>Total deaths / Total positives</h2>
+				<div class="row">
+					<h2 id="8"></h2>
 				</div>
 				<div class="row">
 					<p>
@@ -192,19 +183,19 @@
 				<div class="row" id="c_deaths_positives" style="width: 100%; height: 500px;"></div>
 				<br>
 
-				<div id="5" class="row">
-					<h2>New positives / Exited</h2>
+				<div class="row">
+					<h2 id="9"></h2>
 				</div>
 				<div class="row">
-					<p>
-						New positives over daily (recovered + deaths)
+					<p id="9_1">
+						
 					</p>
 				</div>
 				<div class="row" id="c_nuovi_positivi_usciti" style="width: 100%; height: 500px;"></div>
 				<br>
 
-				<div id="5" class="row">
-					<h2>Intensive care variation</h2>
+				<div class="row">
+					<h2 id="10"></h2>
 				</div>
 				<div class="row">
 					<p>

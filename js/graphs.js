@@ -13,6 +13,87 @@
     fullHeight();
 })(jQuery);
 
+
+var userLang = navigator.language || navigator.userLanguage;
+
+var introduction = document.getElementById("introduction")
+
+var graphs = document.getElementById("graphs")
+var t__8 = document.getElementById('-8')
+var t__7 = document.getElementById('-7')
+var t__6 = document.getElementById('-6')
+var t__5 = document.getElementById('-5')
+var t__4 = document.getElementById('-4')
+var t__3 = document.getElementById('-3')
+var t__2 = document.getElementById('-2')
+var t__1 = document.getElementById('-1')
+var t_0 = document.getElementById('0');
+var t_1 = document.getElementById('1');
+var t_2 = document.getElementById('2');
+var t_3 = document.getElementById('3');
+var t_4 = document.getElementById('4');
+var t_4_1 = document.getElementById('4_1');
+var t_5 = document.getElementById('5');
+var t_5_1 = document.getElementById('5_1');
+var t_6 = document.getElementById('6');
+var t_7 = document.getElementById('7');
+var t_8 = document.getElementById('8');
+var t_9 = document.getElementById('9');
+var t_9_1 = document.getElementById('9_1');
+var t_10 = document.getElementById('10');
+
+if (userLang == "it-IT") {
+    graphs.innerText = "Grafici"
+    t__8.innerText = "Decessi giornalieri covid / Totale morti giornalieri"
+    t__7.innerText = "Decessi giornalieri / Decessi giornalieri in media dal 2015 al 2018"
+    t__6.innerText = "Ricoverati terapia intensiva / Ospedalizzati"
+    t__5.innerText = "Ospedalizzati / Positivi"
+    t__4.innerText = "Nuovi positivi / Numero tamponi"
+    t__3.innerText = "Grafici"
+    t__2.innerText = "Introduzione"
+    introduction.innerText = "Introduzione"
+    t__1.innerHTML = "Questa pagina è aggiornata automaticamente ogni giorno con i dati aggiornati, tutti i dati provengono dal repository ufficiale della <a href=\"https://github.com/pcm-dpc/COVID-19\">Protezione Civile Italiana </a>. Questo progetto è nato per fornire una visione differente dei dati, tramite comparazioni che difficilmente vengono proposte dai media italiani."
+    t_0.innerText = "Non sono un dottore, nè un esperto in virologia. Io raccolgo solo i dati, li processo, e li rendo disponibili."
+    t_1.innerText = "Nuovi positivi / Numero tamponi"
+    t_2.innerText = "Ospedalizzati / Positivi"
+    t_3.innerText = "Ricoverati terapia intensiva / Ospedalizzati"
+    t_4.innerText = "Decessi giornalieri / Decessi giornalieri in media dal 2015 al 2018"
+    t_4_1.innerText = "Questo grafico mostra il rapporto tra le morti giornaliere in Italia nel 2020 e le morti in italia tra il 2015 e il 2018. I dati mancanti non sono ancora stati forniti dall'ISTAT"
+    t_5.innerText = "Decessi giornalieri covid / Totale morti giornalieri"
+    t_5_1.innerText = "Questo grafico mostra il rapporto tra decessi causati dal covid e il numero totale dei decessi in Italia nel 2020. I dati mancanti non sono ancora stati forniti dall'ISTAT"
+    t_6.innerText = "Guariti giornalieri / Nuovi positivi"
+    t_7.innerText = "Guariti giornalieri / Attualmente positivi"
+    t_8.innerText = "Decessi totali / Totale positivi"
+    t_9.innerText = "Nuovi positivi / Usciti"
+    t_9_1.innerText = "Questo grafico mostra il rapporto tra i nuovi positivi e i (guariti + decessi) giornalieri"
+    t_10.innerText = "Variazione terapia intensiva"
+} else {
+    graphs.innerText = "graphs"
+    t__8.innerText = "Daily covid deaths / Daily total deaths"
+    t__7.innerText = "Daily deaths / Daily deaths in median 2015-18"
+    t__6.innerText = "Intensive care / hospitalized"
+    t__5.innerText = "Hospitalized / Positives"
+    t__4.innerText = "Daily positives / Daily tests"
+    t__3.innerText = "Graphs"
+    t__2.innerText = "Introduction"
+    introduction.innerText = "Introduction"
+    t__1.innerHTML = "This page is updated every day, all data are collected from the official <a href=\"https://github.com/pcm-dpc/COVID-19\">Italian repository</a>. This project is born to provide a different data view by different types of data comparison from the usual \"daily new positives\" graphs that the Italian medias shows."
+    t_0.innerText = "I'm not a doctor, nor an expert in virology. I just gather data and plot it."
+    t_1.innerText = "Daily positives / Daily tests";
+    t_2.innerText = "Hospitalized / Positives";
+    t_3.innerText = "Intensive care / hospitalized";
+    t_4.innerText = "Daily deaths / Daily deaths in median 2015-18";
+    t_4_1.innerText = "This graph shows the relation between daily deaths in italy in 2020 and daily deaths in Italy between 2015 and 2018 as a median."
+    t_5.innerText = "Daily covid deaths / Daily total deaths";
+    t_5_1.innerText = "This graph shows the relation between covid deaths and all deaths every day in Italy in 2020. Missing data is (obviously) because of missing datas."
+    t_6.innerText = "Daily recovered / Daily new positives"
+    t_7.innerText = "Daily recovered / Actual positives"
+    t_8.innerText = "Total deaths / Total positives"
+    t_9.innerText = "New positives / Exited"
+    t_9_1.innerText = "New positives over daily (recovered + deaths)"
+    t_10.innerText = "Intensive care variation"
+} 
+
 document.getElementById("sidebarCollapse").onclick = () => {
 
     var sidebar = document.getElementById("sidebar");
@@ -434,7 +515,6 @@ function plot_c_nuovi_positivi_usciti(data) {
     c_nuovi_positivi_usciti.cursor.snapToSeries = series;
     c_nuovi_positivi_usciti.svgContainer.autoResize = false;
 }
-
 
 function plot_c_intensive_variation(data) {
     c_intensive_variation = am4core.create("c_intensive_variation", am4charts.XYChart);
