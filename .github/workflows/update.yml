@@ -1,8 +1,7 @@
 name: update
 
 on:
-  schedule:
-  - cron: "21 17 * * *"
+  push
     
 jobs:
   build:
